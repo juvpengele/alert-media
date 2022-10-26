@@ -34,6 +34,7 @@ import team2 from "../assets/images/team-2.jpg";
 import team3 from "../assets/images/team-3.jpg";
 import team4 from "../assets/images/team-4.jpg";
 import card from "../assets/images/info-card-1.jpg";
+import AlertsTable from "../components/alerts/AlertsTable";
 
 function Home() {
   const { Title, Text } = Typography;
@@ -331,7 +332,20 @@ function Home() {
 
   return (
     <>
-      <h1>Alert media</h1>
+      <Row gutter={[24, 0]}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} className="mb-24">
+            <Card bordered={false} className="criclebox cardbody h-full">
+              <div className="project-ant">
+                <div>
+                  <Title level={2}>Liste des alertes</Title>
+                </div>
+              </div>
+              <div className="ant-list-box table-responsive">
+                <AlertsTable />
+              </div>
+            </Card>
+          </Col>
+        </Row>
     </>
   );
 }

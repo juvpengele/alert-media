@@ -155,7 +155,7 @@ function Sidenav({ color }: { color: any }) {
       <hr />
       <Menu theme="light" mode="inline">
         <Menu.Item key="1">
-          <NavLink to="/dashboard">
+          <NavLink to="/">
             <span
               className="icon"
               style={{ background: page === "dashboard" ? color : "", }}
