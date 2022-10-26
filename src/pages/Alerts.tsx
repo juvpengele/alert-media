@@ -176,7 +176,6 @@ function Alert() {
 
             </Card>
           </Col>
-
         </Row>
 
       </div>
