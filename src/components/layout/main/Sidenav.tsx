@@ -1,6 +1,6 @@
 import { Menu, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../../assets/images/tcinsight-logo.png";
+import logo from "../../../assets/logo-embleme.png";
 
 function Sidenav({ color }: { color: any }) {
   const { pathname } = useLocation();
@@ -158,95 +158,49 @@ function Sidenav({ color }: { color: any }) {
           <NavLink to="/dashboard">
             <span
               className="icon"
-              style={{
-                background: page === "dashboard" ? color : "",
-              }}
+              style={{ background: page === "dashboard" ? color : "", }}
             >
               {dashboard}
             </span>
-            <span className="label">Dashboard</span>
+            <span className="label">Tableau de bord</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="2">
-          <NavLink to="/tables">
+          <NavLink to="/alertes">
             <span
               className="icon"
-              style={{
-                background: page === "tables" ? color : "",
-              }}
+              style={{ background: page === "alerts" ? color : "", }}
             >
               {tables}
             </span>
-            <span className="label">Tables</span>
+            <span className="label">Alertes</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="3">
-          <NavLink to="/billing">
-            <span
-              className="icon"
-              style={{
-                background: page === "billing" ? color : "",
-              }}
-            >
-              {billing}
-            </span>
-            <span className="label">Billing</span>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key="4">
-          <NavLink to="/rtl">
-            <span
-              className="icon"
-              style={{
-                background: page === "rtl" ? color : "",
-              }}
-            >
-              {rtl}
-            </span>
-            <span className="label">RTL</span>
-          </NavLink>
-        </Menu.Item>
+
         <Menu.Item className="menu-item-header" key="5">
-          Account Pages
+          Configuration
         </Menu.Item>
-        <Menu.Item key="6">
-          <NavLink to="/profile">
-            <span
-              className="icon"
-              style={{
-                background: page === "profile" ? color : "",
-              }}
-            >
-              {profile}
-            </span>
-            <span className="label">Profile</span>
-          </NavLink>
-        </Menu.Item>
+
         <Menu.Item key="7">
-          <NavLink to="/sign-in">
+          <NavLink to="/configurations/secteurs">
             <span className="icon">{signin}</span>
-            <span className="label">Sign In</span>
+            <span className="label">Secteurs</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="8">
-          <NavLink to="/sign-up">
+          <NavLink to="/configurations/zones">
             <span className="icon">{signup}</span>
-            <span className="label">Sign Up</span>
+            <span className="label">Zones</span>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="8">
+          <NavLink to="/configurations/themes">
+            <span className="icon">{signup}</span>
+            <span className="label">Thematiques</span>
           </NavLink>
         </Menu.Item>
       </Menu>
-      <div className="aside-footer">
-        <div
-          className="footer-box"
-          style={{
-            background: color,
-          }}
-        >
-          <span className="icon" style={{ color }}>
-            {dashboard}
-          </span>
-        </div>
-      </div>
+
     </>
   );
 }
