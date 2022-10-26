@@ -103,7 +103,7 @@ export const CreateAlert: React.FC = () => {
         description: "L'alerte a été créée avec succès"
       });
 
-      navigate('/alerts');
+      navigate('/alertes');
 
     } catch(error: any) {
       _handleRequestErrors(error);

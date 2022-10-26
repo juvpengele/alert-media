@@ -38,7 +38,7 @@ export function Login() {
 
   useEffect(() => {
     if(auth) {
-      navigate('/dashboard');
+      navigate('/');
     }
   }, [auth]);
 
