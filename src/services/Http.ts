@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const axios = Axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://alert-media-backend.herokuapp.com/'
+  baseURL: 'https://alert-media-backend.herokuapp.com/api'
 })
 
 axios.interceptors.request.use((configuration) => {
