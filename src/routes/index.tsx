@@ -20,7 +20,7 @@ const authRoutes: RouteElement[] = [
   { path: "/auth/login", element: <Login /> },
 ];
 const dashboardRoutes: RouteElement[] = [
-  { path: "/dashboard", element: <Home /> },
+  { path: "/", element: <Home /> },
   { path: "/alertes", element: <Alert /> },
   { path: "/alertes/create", element: <CreateAlert />},
   { path: "/configurations/secteurs", element: <Sector />},
