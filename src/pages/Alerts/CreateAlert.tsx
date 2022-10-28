@@ -5,11 +5,10 @@ import { axios } from '../../services/Http';
 import { addSectors, getSectors, Sector } from '../../store/sectorsSlice';
 import { addThemes, getThemes, Theme } from '../../store/themeSlice';
 import { addZones, getZones, Zone } from '../../store/zonesSlice';
-import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import type { DatePickerProps } from 'antd';
 import { transformFormErrors } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
 const { Title } = Typography;
 
@@ -36,6 +35,7 @@ interface AlertFormValues {
 
 export const CreateAlert: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     values,
@@ -54,7 +54,6 @@ export const CreateAlert: React.FC = () => {
     onSubmit: handleFormSubmit,
     validationSchema,
   });
-  const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchSectors() {
@@ -89,7 +88,6 @@ export const CreateAlert: React.FC = () => {
     fetchThemes();
   }, []);
 
-
   const zones = useSelector(getZones);
   const sectors = useSelector(getSectors);
   const themes = useSelector(getThemes);
@@ -104,14 +102,13 @@ export const CreateAlert: React.FC = () => {
       });
 
       navigate('/alertes');
-
     } catch(error: any) {
       _handleRequestErrors(error);
     }
   }
 
   function _handleRequestErrors(error:any) {
-    const formErrors: {[field:string]: string[]} | undefined = error?.response?.data?.errors;
+    const formErrors: { [field:string]: string[] } | undefined = error?.response?.data?.errors;
     if(formErrors) {
       const errors = transformFormErrors(formErrors);
       setErrors(errors);

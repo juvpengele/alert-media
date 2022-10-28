@@ -2,11 +2,10 @@ import Axios from 'axios';
 
 const axios = Axios.create({
   baseURL: 'https://alert-media-backend.herokuapp.com/api'
-  
+  // baseURL: 'http://localhost:8000/api'
 })
 
 axios.interceptors.request.use((configuration) => {
-  
   const auth = localStorage.getItem('auth');
   if(auth) {
     try {
