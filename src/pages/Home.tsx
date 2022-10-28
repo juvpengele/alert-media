@@ -1,29 +1,54 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { UnderlineOutlined } from "@ant-design/icons";
-import { Card, Col, Row, Typography } from "antd";
+import { AlertOutlined, CheckCircleFilled } from "@ant-design/icons";
+import { Card, Col, Row, Typography, Progress } from "antd";
 import AlertPerMonths from "../components/alerts/AlertPerMonths";
 import AlertsPerSector from "../components/alerts/AlertsPerSector";
 import AlertsPerZone from "../components/alerts/AlertsPerZone";
+import { axios } from "../services/Http";
 
+type DashboardStats = {
+  todayAlerts: number,
+  todayCompletedAlerts: number,
+  totalAlerts: number,
+  totalCompletedAlerts: number,
+}
 const { Title } = Typography;
 function Home() {
+  const [dashboardStats, setDashboardStats] = useState<DashboardStats>({
+    todayAlerts: 0,
+    todayCompletedAlerts: 0,
+    totalAlerts: 0,
+    totalCompletedAlerts: 0,
+  })
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const response = await axios.get('/statistics/dashboard-stats');
+        setDashboardStats(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchStats();
+  }, []);
+
   return (
     <>
       <Row gutter={[24, 0]}>
         <Col xs={24} sm={24} md={12} lg={8} xl={6} className="mb-24">
-          <Card bordered={false} className="criclebox ">
+          <Card bordered={false} className="criclebox "  style={{ paddingBottom: '1.5rem'}}>
               <div className="number">
                 <Row align="middle" gutter={[24, 0]}>
                   <Col xs={18}>
                     <span>Aujourd'hui</span>
                     <Title level={3}>
-                      {10} <small className="">{10 > 1 ? "Alertes" : "Alerte"}</small>
+                      { dashboardStats.todayAlerts } <small className="">{dashboardStats.todayAlerts > 1 ? "Alertes" : "Alerte"}</small>
                     </Title>
                   </Col>
                   <Col xs={6}>
                     <div className="icon-box">
-                      <UnderlineOutlined />
+                      <AlertOutlined />  
                     </div>
                   </Col>
                 </Row>
@@ -31,18 +56,40 @@ function Home() {
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={8} xl={6} className="mb-24">
-        <Card bordered={false} className="criclebox ">
+        <Card bordered={false} className="criclebox " >
             <div className="number">
               <Row align="middle" gutter={[24, 0]}>
                 <Col xs={18}>
                   <span>Aujourd'hui</span>
                   <Title level={3}>
-                    {10} <small className="">{10 > 1 ? "Alertes" : "Alerte"}</small>
+                    {dashboardStats.todayCompletedAlerts} <small className="">{10 > 1 ? "Alertes" : "Alerte"}</small>
+                  </Title>
+                  <Progress percent={
+                    dashboardStats.todayCompletedAlerts * 100 / dashboardStats.todayAlerts || 0
+                  } />
+                </Col>
+                <Col xs={6}>
+                  <div className="icon-box success">
+                    <CheckCircleFilled />
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </Card>
+        </Col>
+        <Col xs={24} sm={24} md={12} lg={8} xl={6} className="mb-24">
+        <Card bordered={false} className="criclebox " style={{ paddingBottom: '1.5rem'}} >
+            <div className="number">
+              <Row align="middle" gutter={[24, 0]}>
+                <Col xs={18}>
+                  <span>Total</span>
+                  <Title level={3}>
+                    {dashboardStats.totalAlerts} <small className="">{dashboardStats.totalAlerts > 1 ? "Alertes" : "Alerte"}</small>
                   </Title>
                 </Col>
                 <Col xs={6}>
                   <div className="icon-box">
-                    <UnderlineOutlined />
+                    <AlertOutlined />
                   </div>
                 </Col>
               </Row>
@@ -54,33 +101,17 @@ function Home() {
             <div className="number">
               <Row align="middle" gutter={[24, 0]}>
                 <Col xs={18}>
-                  <span>Aujourd'hui</span>
+                  <span>Traitées</span>
                   <Title level={3}>
-                    {10} <small className="">{10 > 1 ? "Alertes" : "Alerte"}</small>
+                    {dashboardStats.totalCompletedAlerts} <small className="">{dashboardStats.totalCompletedAlerts > 1 ? "Alertes" : "Alerte"}</small>
                   </Title>
+                  <Progress percent={
+                    dashboardStats.totalCompletedAlerts * 100 / dashboardStats.totalAlerts || 0
+                  } />
                 </Col>
                 <Col xs={6}>
-                  <div className="icon-box">
-                    <UnderlineOutlined />
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </Card>
-        </Col>
-        <Col xs={24} sm={24} md={12} lg={8} xl={6} className="mb-24">
-        <Card bordered={false} className="criclebox ">
-            <div className="number">
-              <Row align="middle" gutter={[24, 0]}>
-                <Col xs={18}>
-                  <span>Aujourd'hui</span>
-                  <Title level={3}>
-                    {10} <small className="">{10 > 1 ? "Alertes" : "Alerte"}</small>
-                  </Title>
-                </Col>
-                <Col xs={6}>
-                  <div className="icon-box">
-                    <UnderlineOutlined />
+                  <div className="icon-box success">
+                    <CheckCircleFilled />
                   </div>
                 </Col>
               </Row>
